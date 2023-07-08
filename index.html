@@ -96,25 +96,27 @@
                   $('#highlight').text(highlight.substr(0, Math.round($('#highlight').html())))
                 },
                 complete: function() {
-                  $('#hi').css('visibility', 'visible');
-                  anime({
-                    targets: '#hi',
-                    scale: [
-                      { value: 0, duration: 0 },
-                      { value: 1, duration: 5000, ease: 'easeInOutQuarter' },
-                    ],
-                    loop: false,
-                    complete: function() {
-                      anime({
-                        targets: '#hi',
-                        scale: [
-                          { value: 1.25, duration: 5000, ease: 'easeInOutQuerter' },
-                          { value: 1, duration: 5000, ease: 'easeInOutQuerter' },
-                        ],
-                        loop: true,
-                      })
-                    }
-                  });
+                  setTimeout(() => {
+                    $('#hi').css('visibility', 'visible');
+                    anime({
+                      targets: '#hi',
+                      scale: [
+                        { value: 0, duration: 0 },
+                        { value: 1, duration: 5000, ease: 'easeInOutQuarter' },
+                      ],
+                      loop: false,
+                      complete: function() {
+                        anime({
+                          targets: '#hi',
+                          scale: [
+                            { value: 1.25, duration: 5000, ease: 'easeInOutQuerter' },
+                            { value: 1, duration: 5000, ease: 'easeInOutQuerter' },
+                          ],
+                          loop: true,
+                        })
+                      }
+                    });
+                  }, 1000);
                 }
               })
             }
