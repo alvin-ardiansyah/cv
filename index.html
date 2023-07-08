@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alvin Ardiansyah Maulana</title>
+  <link rel="stylesheet" href="assets/css/default.min.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li class="active"><a href="#"><span>Personal</span></a></li>
+      <li><a href="#"><span>What I Do</span></a></li>
+      <li><a href="#"><span>My Journey</span></a></li>
+      <li><a href="#"><span>Expertise</span></a></li>
+      <li id="contact"><a href="#"><span>Get Connected</span></a></li>
+    </ul>
+  </nav>
+  <div id="particles-js"></div>
+  <div class="container">
+    <span class="tagline"><span id="firstline"></span><br><span id="secondline"></span><span id="highlight" class="highlight"></span></span>
+    <div id="hi">Hi!</div>
+    <div id="content">
+      <div class="title">
+        <i id="content-icon" class="las la-lightbulb"></i>
+        <span id="content-text">Creative</span>
+      </div>
+    </div>
+    <ul class="navigation">
+      <li id="lightbulb" class="active"><a href="#"></a></li>
+      <li id="fist-raised"><a href="#"></a></li>
+      <li id="bullseye"><a href="#"></a></li>
+      <li id="cogs"><a href="#"></a></li>
+      <li id="puzzle-piece"><a href="#"></a></li>
+    </ul>
+    <div class="main">
+      <p id="first-paragraph"></p>
+      <p id="second-paragraph"></p>
+      <p id="third-paragraph"></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="detail">
+      <div class="contact">
+        <a href="mailto:alvinardiansyahmaulana@gmail.com" target="_blank"><i class="las la-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/alvin-ardiansyah-maulana-a579b0250/" target="_blank"><i class="lab la-linkedin-in"></i></a>
+        <a href="https://github.com/alvinteramedik" target="_blank"><i class="lab la-github-alt"></i></a>
+        <a href="https://leetcode.com/alvinardiansyah/" target="_blank"><i class="las la-code"></i></a>
+      </div>
+      <div class="note">
+        2023 &copy; Alvin Ardiansyah Maulana
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/jquery-3.7.0.min.js"></script>
+  <script src="assets/js/particles.min.js"></script>
+  <script src="assets/js/anime.min.js"></script>
+  <script>
+    $(() => {
+      particlesJS.load('particles-js', 'particles.config.json');
+
+      const firstline = "Creative mind";
+      const secondline = "meet ";
+      const highlight = "perfection.";
+      const duration = 600;
+      anime({
+        targets: '#firstline',
+        innerHTML: [0, firstline.length],
+        easing: 'linear',
+        round: 1,
+        duration: duration,
+        update: function() {
+          $('#firstline').text(firstline.substr(0, Math.round($('#firstline').html())));
+        },
+        complete: function() {
+          anime({
+            targets: '#secondline',
+            innerHTML: [0, secondline.length],
+            easing: 'linear',
+            round: 1,
+            duration: (duration / (firstline.length / secondline.length)),
+            update: function() {
+              $('#secondline').text(secondline.substr(0, Math.round($('#secondline').html())))
+            },
+            complete: function() {
+              anime({
+                targets: '#highlight',
+                innerHTML: [0, highlight.length],
+                easing: 'linear',
+                round: 1,
+                duration: (duration / (firstline.length / highlight.length)),
+                update: function() {
+                  $('#highlight').text(highlight.substr(0, Math.round($('#highlight').html())))
+                },
+                complete: function() {
+                  $('#hi').css('visibility', 'visible');
+                  anime({
+                    targets: '#hi',
+                    scale: [
+                      { value: 0, duration: 0 },
+                      { value: 1, duration: 5000, ease: 'easeInOutQuarter' },
+                    ],
+                    loop: false,
+                    complete: function() {
+                      anime({
+                        targets: '#hi',
+                        scale: [
+                          { value: 1.25, duration: 5000, ease: 'easeInOutQuerter' },
+                          { value: 1, duration: 5000, ease: 'easeInOutQuerter' },
+                        ],
+                        loop: true,
+                      })
+                    }
+                  });
+                }
+              })
+            }
+          })
+        }
+      });
+
+      const personalBrand = [
+        { icon: 'lightbulb', text: 'Creative' },
+        { icon: 'fist-raised', text: 'Hard Work' },
+        { icon: 'bullseye', text: 'Dedication' },
+        { icon: 'cogs', text: 'Efficient' },
+        { icon: 'puzzle-piece', text: 'Problem Solving' },
+      ];
+
+      let currentIndex = 0;
+      setInterval(() => {
+        anime({
+          targets: '#content',
+          opacity: [1, 0],
+          translateY: ['0', '-100%'],
+          duration: 500,
+          easing: 'easeInOutQuad',
+          complete: function(anim) {
+            $('#content-icon').removeClass().addClass(`las la-${personalBrand[currentIndex].icon}`);
+            $('#content-text').text(personalBrand[currentIndex].text);
+            $('.container > .navigation').find('li.active').removeClass('active');
+            $(`#${personalBrand[currentIndex].icon}`).addClass('active');
+            anime({
+              targets: '#content',
+              opacity: [0, 1],
+              translateY: ['100%', '0'],
+              duration: 500,
+              easing: 'easeInOutQuad'
+            });
+          }
+        });
+
+        currentIndex++;
+        if (currentIndex >= personalBrand.length) {
+          currentIndex = 0;
+        }      
+      }, 3000);
+
+      const firstParagraph = 'Hi, my name is Alvin, I am a Software Engineer and also an IoT Enthusiast. I love writing program and building IoT device.';
+      const secondParagraph = 'I am an ambitious and hardworking individual, with broad skills and experienced in web development.';
+      const thirdParagraph = 'Furthermore, I am a good problem solver with creative thinking.';
+      $('#hi').click(() => {
+        anime({
+          targets: '#hi',
+          scale: [{ value: 0 }],
+          complete: function() {
+            $('#hi').css('visibility', 'hidden');
+            anime({
+              targets: '.tagline',
+              opacity: [1, 0],
+              translateX: ['0', '-100%'],
+              duration: 250,
+              easing: 'easeInOutQuad',
+              complete: function() {
+                anime({
+                  targets: '#content',
+                  opacity: [1, 0],
+                  translateX: ['0', '100%'],
+                  duration: 250,
+                  easing: 'easeInOutQuad',
+                  update: function() {
+                    $('#content').hide();
+                  },
+                  complete: function() {
+                    anime({
+                      targets: '.navigation',
+                      opacity: [1, 0],
+                      translateX: ['0', '100%'],
+                      duration: 250,
+                      easing: 'easeInOutQuad',
+                      update: function() {
+                        $('.navigation').hide();
+                      },
+                      complete: function() {
+                        $('.main').css('visibility', 'visible');
+                        const paragraphDuration = 2000;
+                        anime({
+                          targets: '#first-paragraph',
+                          innerHTML: [0, firstParagraph.length],
+                          easing: 'linear',
+                          round: 1,
+                          duration: paragraphDuration,
+                          update: function() {
+                            $('#first-paragraph').text(firstParagraph.substr(0, Math.round($('#first-paragraph').html())));
+                          },
+                          complete: function() {
+                            anime({
+                              targets: '#second-paragraph',
+                              innerHTML: [0, secondParagraph.length],
+                              easing: 'linear',
+                              round: 1,
+                              duration: (paragraphDuration / (firstParagraph.length / secondParagraph.length)),
+                              update: function() {
+                                $('#second-paragraph').text(secondParagraph.substr(0, Math.round($('#second-paragraph').html())));
+                              },
+                              complete: function() {
+                                anime({
+                                  targets: '#third-paragraph',
+                                  innerHTML: [0, thirdParagraph.length],
+                                  easing: 'linear',
+                                  round: 1,
+                                  duration: (paragraphDuration / (firstParagraph.length / thirdParagraph.length)),
+                                  update: function() {
+                                    $('#third-paragraph').text(thirdParagraph.substr(0, Math.round($('#third-paragraph').html())));
+                                  },
+                                })
+                              }
+                            })
+                          }
+                        })
+                      }
+                    })
+                  }
+                });
+              }
+            });
+          }
+        });
+      })
+    })
+  </script>
+</body>
+</html>
